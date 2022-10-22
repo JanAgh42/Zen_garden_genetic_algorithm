@@ -16,10 +16,10 @@ namespace ZenGarden.src.models
             random = new Random();
             NumOfGenes = genes;
 
-            generateGenes();
+            GenerateGenes();
         }
 
-        private void generateGenes()
+        private void GenerateGenes()
         {
             for(int count = 0; count < NumOfGenes; count++)
             {
