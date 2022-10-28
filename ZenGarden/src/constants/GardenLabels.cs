@@ -5,6 +5,7 @@ namespace ZenGarden.src.constants
         EMPTY = '-',
         LEAF = 'L',
         STONE = 'S',
-        RAKED = 'R'
+        RAKED = 'R',
+        PERIM = 'P'
     }
 }

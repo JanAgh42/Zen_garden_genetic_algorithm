@@ -26,9 +26,14 @@ namespace ZenGarden.src.models
             return this is RakedPortion;
         }
 
+        public bool IsPerim()
+        {
+            return this is PerimeterPortion;
+        }
+
         public bool IsEmpty()
         {
-            return this is GardenPortion;
+            return !IsLeaf() && !IsStone() && !IsRaked() && !IsPerim();
         }
     }
 }

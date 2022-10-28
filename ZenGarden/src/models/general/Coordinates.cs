@@ -5,7 +5,12 @@ namespace ZenGarden.src.models
         public int X { get; protected set; }
         public int Y { get; protected set; }
 
-        public Coordinates((int xCoord, int yCoord) coords)
+        public Coordinates((int, int) coords)
+        {
+            UpdateCoords(coords);
+        }
+
+        public void UpdateCoords((int xCoord, int yCoord) coords)
         {
             X = coords.xCoord;
             Y = coords.yCoord;
