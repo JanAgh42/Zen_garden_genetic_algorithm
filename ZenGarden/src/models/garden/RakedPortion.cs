@@ -2,6 +2,7 @@ using ZenGarden.src.constants;
 
 namespace ZenGarden.src.models
 {
+    [Serializable]
     class RakedPortion : GardenPortion
     {
         public RakedPortion Previous { get; set; } = null!;

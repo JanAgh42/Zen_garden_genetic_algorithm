@@ -8,34 +8,27 @@ namespace ZenGarden
         static void Main(string[] args)
         {
             var stones = new List<(int, int)>();
-            stones.Add((1, 2));
-            stones.Add((2, 4));
-            stones.Add((5, 3));
+            stones.Add((2, 3));
+            stones.Add((3, 5));
+            stones.Add((5, 4));
+            stones.Add((6, 2));
+            stones.Add((10, 7));
+            stones.Add((9, 7));
 
-            GeneticAlgorithm a = new GeneticAlgorithm(10, 15, stones);
-            // a.Garden.GenerateGarden();
-            // a.Garden.PrintGarden();
-            // Console.WriteLine("a");
+            GeneticAlgorithm a = new GeneticAlgorithm(14, 12, stones);
+
             a.ComputeFitness();
-            // Console.WriteLine(Converters.GetPos(10, 15, 21, 15));
-            // Garden G = new Garden(10, 15, stones);
-            // G.GenerateGarden();
-            // G.PrintGarden();
-            // Console.WriteLine(G.GetPerimCoords(12));
-            // a.Garden.PrintGarden();
-            // bool x = Validation.IsLegalPos(a.Garden.Width, a.Garden.Height, a.Garden.GardenPortions[3, 0]);
-            // bool y = a.Garden.GardenPortions[1, 0].IsStone();
-            // for(int d = 0; d < a.Garden.GardenPortions.GetLength(0); d++) {
-            //     for (int c = 0; c < a.Garden.GardenPortions.GetLength(1); c++)
-            //     {
-            //         if(a.Garden.GardenPortions[d, c].IsStone()) {
-            //             Console.WriteLine(d + " " + c);
-            //         }
-            //     }
-            // }
-            // Console.WriteLine(x);
-            // Console.WriteLine(y);
 
+            for (int x = 0; x < 200; x++)
+            {
+                a.Monk.CreateNewGeneration();
+                a.ComputeFitness();
+            }
+
+            Console.WriteLine("--------");
+
+            a.Garden.PrintGarden();
+            Console.WriteLine(a.Monk.MaxFitness);
         }
     }
 }

@@ -1,5 +1,6 @@
 namespace ZenGarden.src.models
 {
+    [Serializable]
     class Coordinates
     {
         public int X { get; protected set; }

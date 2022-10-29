@@ -2,6 +2,7 @@ using ZenGarden.src.constants;
 
 namespace ZenGarden.src.models
 {
+    [Serializable]
     class PerimeterPortion : GardenPortion
     {
         public int Number { get; private set; }

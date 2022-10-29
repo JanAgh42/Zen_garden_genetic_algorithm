@@ -4,9 +4,11 @@ using ZenGarden.src.logic;
 
 namespace ZenGarden.src.models
 {
+    [Serializable]
     class Garden
     {
         public GardenPortion[,] GardenPortions { get; private set; } = null!;
+        public GardenPortion[,] FinalPortions { get; private set; } = null!;
         public List<Leaf> Leaves { get; private set; } = null!;
         public List<(int, int)> Stones { get; private set; } = null!;
         
@@ -22,6 +24,11 @@ namespace ZenGarden.src.models
             Stones = stones;
 
             _random = new Random();
+        }
+
+        public void CreateCopy()
+        {
+            FinalPortions = Converters.DeepClone<GardenPortion[,]>(GardenPortions);
         }
 
         public void RakeGardenPortion((int X, int Y) coords, int order)
@@ -89,15 +96,15 @@ namespace ZenGarden.src.models
 
         public void PrintGarden()
         {
-            for (int y = 0; y < GardenPortions.GetLength(0); y++)
+            for (int y = 1; y < FinalPortions.GetLength(0) - 1; y++)
             {
-                for (int x = 0; x < GardenPortions.GetLength(1); x++)
+                for (int x = 1; x < FinalPortions.GetLength(1) - 1; x++)
                 {
-                    if(GardenPortions[y, x].IsRaked()) {
-                        Console.Write(((RakedPortion) GardenPortions[y, x]).RakeOrder + " ");
+                    if(FinalPortions[y, x].IsRaked()) {
+                        Console.Write(((RakedPortion) FinalPortions[y, x]).RakeOrder + " ");
                     }
                     else {
-                        Console.Write((char) GardenPortions[y, x].Label + " ");
+                        Console.Write((char) FinalPortions[y, x].Label + " ");
                     }
                 }
                 Console.WriteLine();

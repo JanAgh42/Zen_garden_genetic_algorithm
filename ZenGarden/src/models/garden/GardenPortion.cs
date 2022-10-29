@@ -2,6 +2,7 @@ using ZenGarden.src.constants;
 
 namespace ZenGarden.src.models
 {
+    [Serializable]
     class GardenPortion : Coordinates
     {
         public GardenLabels Label { get; set; }

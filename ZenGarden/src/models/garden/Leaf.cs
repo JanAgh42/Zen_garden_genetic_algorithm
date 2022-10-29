@@ -2,6 +2,7 @@ using ZenGarden.src.constants;
 
 namespace ZenGarden.src.models
 {
+    [Serializable]
     class Leaf : GardenPortion
     {
         public LeafColors Color { get; private set; }
