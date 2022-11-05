@@ -20,32 +20,42 @@ namespace ZenGarden.src.logic
 
         public static (int, int) GetMove(int width, int height, (int X, int Y) coords)
         {
-            if (coords.Y == 0){
+            if (coords.Y == 0) {
                 return Translations._MoveDown;
             }
-            else if(coords.Y == height - 1) {
+            else if (coords.Y == height - 1) {
                 return Translations._MoveUp;
             }
-            else if(coords.X == 0) {
+            else if (coords.X == 0) {
                 return Translations._MoveRight;
             }
-            else if(coords.X == width - 1) {
+            else if (coords.X == width - 1) {
                 return Translations._MoveLeft;
             }
             return (0, 0);
         }
 
+        public static LeafColors GetLeafColor(string leaf)
+        {
+            switch (leaf) {
+                case "Y":
+                    return LeafColors.YELLOW;
+                case "O":
+                    return LeafColors.ORANGE;
+                default:
+                    return LeafColors.RED;
+            }
+        }
+
         public static T DeepClone<T>(T obj)
         {
-            using (var memoryStream = new MemoryStream())
-            {
-                var formatter = new BinaryFormatter();
+            var memoryStream = new MemoryStream();
+            var formatter = new BinaryFormatter();
 
-                formatter.Serialize(memoryStream, obj);
-                memoryStream.Position = 0;
+            formatter.Serialize(memoryStream, obj);
+            memoryStream.Position = 0;
 
-                return (T) formatter.Deserialize(memoryStream);
-            }
+            return (T) formatter.Deserialize(memoryStream);
         }
     }
 }

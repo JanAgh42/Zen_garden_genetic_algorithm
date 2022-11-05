@@ -35,10 +35,14 @@ namespace ZenGarden.src.models
 
         public void MutateGenes()
         {
-            for (int counter = 0; counter < _random.Next(1, 3); counter++)
+            for (int counter = 0; counter < _random.Next(1, 4); counter++)
             {
                 int genePos = _random.Next(0, NumOfGenes);
-                int mutVal = _random.Next(-1, 2);
+                int mutVal = _random.Next(-2, 3);
+
+                if (mutVal == 0) {
+                    mutVal++;
+                }
 
                 if (Genes[genePos] + mutVal <= _upperBound && Genes[genePos] - mutVal >= _lowerBound) {
                     Genes[genePos] += mutVal;

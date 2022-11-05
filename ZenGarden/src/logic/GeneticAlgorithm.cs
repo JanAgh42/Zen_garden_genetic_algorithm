@@ -1,4 +1,5 @@
 using ZenGarden.src.models;
+using ZenGarden.src.constants;
 
 namespace ZenGarden.src.logic
 {
@@ -7,9 +8,9 @@ namespace ZenGarden.src.logic
         public Garden Garden { get; set; }
         public Monk Monk { get; set; }
 
-        public GeneticAlgorithm(int width, int height, List<(int, int)> stones)
+        public GeneticAlgorithm(int width, int height, List<(int, int)> stones, List<Leaf> leaves)
         {
-            Garden = new Garden(width, height, stones);
+            Garden = new Garden(width, height, stones, leaves);
             Monk = new Monk(width + height + stones.Count);
         }
 
@@ -17,12 +18,11 @@ namespace ZenGarden.src.logic
         {
             foreach (Chromosome entity in Monk.Chromosomes)
             {
-                if(entity.HasFitness) {
+                if (entity.HasFitness) {
                     continue;
                 }
-
                 double fitness = 0;
-                int order = 1;
+                int order = 1, perimSum = 0;
 
                 var perims = Garden.GenerateGarden();
                 
@@ -32,21 +32,24 @@ namespace ZenGarden.src.logic
                     var chosenPerim = Garden.GetPerimCoords(perim);
                     var move = Converters.GetMove(Garden.Width, Garden.Height, chosenPerim);
 
+                    perimSum += perim;
+
                     Monk.UpdateCoords(chosenPerim);
                     Monk.MoveMonkForward(move);
 
-                    if(!Validation.IsLegalPos(Garden.Width, Garden.Height, Garden.GardenPortions[Monk.Y, Monk.X])) {
+                    if (!Validation.IsLegalPos(Garden.Width, Garden.Height, Garden.GardenPortions[Monk.Y, Monk.X])) {
                         Monk.MoveMonkBackwards(move);
                         continue;
                     }
                     var pathDetails = GeneratePath(move, order++);
 
-                    if(pathDetails.end) {
+                    fitness += pathDetails.fitness;
+
+                    if (pathDetails.end) {
                         break;
                     }
-                    fitness += pathDetails.fitness;
                 }
-                entity.FitnessValue = Math.Round(fitness + 1.0 / (double) (order * 10), 5);
+                entity.FitnessValue = Math.Round(fitness + 1.0 / (double) (order * 10) + perimSum * 0.00001, 5);
 
                 if (entity.FitnessValue > Monk.MaxFitness) {
                     Monk.MaxFitness = entity.FitnessValue;
@@ -62,19 +65,19 @@ namespace ZenGarden.src.logic
             int numOfPortions = 0;
             bool deadEnd = false;
 
-            while(Validation.IsInsideBounds(Garden.Width, Garden.Height, Monk.GetCoords))
+            while (Validation.IsInsideBounds(Garden.Width, Garden.Height, Monk.GetCoords))
             {
-                if(Validation.IsLegalPos(Garden.Width, Garden.Height, Garden.GardenPortions[Monk.Y,Monk.X])) {
+                if (Validation.IsLegalPos(Garden.Width, Garden.Height, Garden.GardenPortions[Monk.Y,Monk.X])) {
                     Garden.RakeGardenPortion(Monk.GetCoords, order);
                     numOfPortions++;
                     Monk.MoveMonkForward(move);
                 }
-                else if(Validation.IsObstacle(Garden.GardenPortions[Monk.Y, Monk.X])) {
+                else if (Validation.IsObstacle(Garden.GardenPortions[Monk.Y, Monk.X])) {
                     Monk.MoveMonkBackwards(move);
 
                     move = Garden.FindNewMove(Monk.GetCoords);
 
-                    if(move == (0, 0)) {
+                    if (move == (0, 0)) {
                         deadEnd = true;
                         break;
                     }

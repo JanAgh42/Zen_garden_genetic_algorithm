@@ -9,7 +9,7 @@ namespace ZenGarden.src.models
         public double MaxFitness { get; set; } = 0;
 
         private readonly Random _random;
-        private readonly int _numOfChromosomes = 70;
+        private readonly int _numOfChromosomes = 80;
         private readonly int _numOfGenes;
 
         public Monk (int genes = 6) : base ((0, 0))
@@ -28,18 +28,18 @@ namespace ZenGarden.src.models
 
             for (int counter = 0; counter < 10; counter++)
             {
+                newChromosomes.Add(new Chromosome(true, _numOfGenes));
                 newChromosomes.Add(Chromosomes[0].CreateCopy(true));
 
                 Chromosomes.RemoveAt(0);
                 Chromosomes.RemoveAt(_numOfChromosomes - ((counter + 1) * 2));
             }
 
-            for (int counter = 0; counter < (_numOfChromosomes - 10) / 2; counter++)
+            for (int counter = 0; counter < (_numOfChromosomes - 20) / 2; counter++)
             {
-                var firstWinner = 0;
-                var secondWinner = 0;
+                int firstWinner = 0, secondWinner = 0;
 
-                if (counter < (_numOfChromosomes - 10) / 4) {
+                if (counter < (_numOfChromosomes - 20) / 4) {
                     firstWinner = TournamentSelection();
                     secondWinner = TournamentSelection();
                 }
@@ -75,7 +75,7 @@ namespace ZenGarden.src.models
 
         public void PerformMutations()
         {
-            for (int counter = 1; counter <= 10; counter++)
+            for (int counter = 1; counter <= 20; counter++)
             {
                 var chosenChromosome = _random.Next(1, _numOfChromosomes);
 
@@ -110,9 +110,9 @@ namespace ZenGarden.src.models
 
         private int TournamentSelection()
         {
-            var participants = new List<int>(5);
+            var participants = new List<int>(2);
 
-            for (int counter = 0; counter < 5; counter++)
+            for (int counter = 0; counter < 2; counter++)
             {
                 participants.Add(_random.Next(0, _numOfChromosomes - 20));
             }
@@ -133,8 +133,7 @@ namespace ZenGarden.src.models
             var participants = new List<int>(5);
             var probabilities = new List<double>(5);
 
-            double totalFitness = 0;
-            double tempFitness = 0;
+            double totalFitness = 0, tempFitness = 0;
 
             for (int counter = 0; counter < 5; counter++)
             {
@@ -144,10 +143,7 @@ namespace ZenGarden.src.models
 
             int rouletteWinner = participants[0];
 
-            foreach (int index in participants)
-            {
-                probabilities.Add(Math.Round(Chromosomes[index].FitnessValue / totalFitness, 4));
-            }
+            participants.ForEach(index => probabilities.Add(Math.Round(Chromosomes[index].FitnessValue / totalFitness, 4)));
 
             double selection = Math.Round(_random.NextDouble(), 4);
 
