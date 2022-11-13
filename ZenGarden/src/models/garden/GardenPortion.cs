@@ -12,6 +12,7 @@ namespace ZenGarden.src.models
             Label = label;
         }
 
+        // methods used to determine which derived type does the given object belong to
         public bool IsLeaf()
         {
             return this is Leaf;

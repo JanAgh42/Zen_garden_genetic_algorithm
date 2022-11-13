@@ -8,7 +8,7 @@ namespace ZenGarden.src.models
         public int NumOfGenes { get; private set; }
         public double FitnessValue { get; set; } = -1;
 
-        private readonly int _upperBound = 50;
+        private readonly int _upperBound = 100;
         private readonly int _lowerBound = 0;
 
         private readonly Random _random;
@@ -25,6 +25,7 @@ namespace ZenGarden.src.models
             }
         }
 
+        // creates a Chromosome deepcopy
         public Chromosome CreateCopy(bool copyFitness)
         {
             return new Chromosome(false, NumOfGenes) {
@@ -33,12 +34,13 @@ namespace ZenGarden.src.models
             };
         }
 
+        // choose genes to mutate and perform mutations
         public void MutateGenes()
         {
             for (int counter = 0; counter < _random.Next(1, 4); counter++)
             {
                 int genePos = _random.Next(0, NumOfGenes);
-                int mutVal = _random.Next(-2, 3);
+                int mutVal = _random.Next(-4, 5);
 
                 if (mutVal == 0) {
                     mutVal++;
@@ -50,6 +52,7 @@ namespace ZenGarden.src.models
             }
         }
 
+        // generate genes with random values
         private void GenerateGenes()
         {
             for (int count = 0; count < NumOfGenes; count++)

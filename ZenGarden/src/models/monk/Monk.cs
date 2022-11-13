@@ -56,6 +56,7 @@ namespace ZenGarden.src.models
             Chromosomes = newChromosomes;
         }
 
+        // sorts all chromosomes according to their fitness
         public void SortByFitnessDescending()
         {
             Chromosomes = Chromosomes.OrderByDescending(chromosome => chromosome.FitnessValue).ToList();
@@ -73,6 +74,7 @@ namespace ZenGarden.src.models
             Y -= translation.yCoord;
         }
 
+        //selects 20 chromosomes, which will be subjects to mutations
         public void PerformMutations()
         {
             for (int counter = 1; counter <= 20; counter++)
@@ -91,6 +93,7 @@ namespace ZenGarden.src.models
             }
         }
 
+        // creates 2 new chromosomes based on their parents
         private (Chromosome first, Chromosome second) PerformCrossover(int first, int second)
         {
             var firstEntity = Chromosomes[first].CreateCopy(false);
@@ -108,6 +111,7 @@ namespace ZenGarden.src.models
             return (firstEntity, secondEntity);
         }
 
+        // randomly selects 2 chromosomes and returns the one with the highest fitness value
         private int TournamentSelection()
         {
             var participants = new List<int>(2);
@@ -128,6 +132,7 @@ namespace ZenGarden.src.models
             return tournamentWinner;
         }
 
+        // performs roulette selection and return the chosen chromosome
         private int RouletteSelection()
         {
             var participants = new List<int>(5);
@@ -135,6 +140,7 @@ namespace ZenGarden.src.models
 
             double totalFitness = 0, tempFitness = 0;
 
+            // choses 5 chromosomes at random
             for (int counter = 0; counter < 5; counter++)
             {
                 participants.Add(_random.Next(0, _numOfChromosomes - 20));
@@ -143,10 +149,12 @@ namespace ZenGarden.src.models
 
             int rouletteWinner = participants[0];
 
+            // counts the probability of selection for each chosen chromosome
             participants.ForEach(index => probabilities.Add(Math.Round(Chromosomes[index].FitnessValue / totalFitness, 4)));
 
             double selection = Math.Round(_random.NextDouble(), 4);
 
+            // selects the winner 
             for (int counter = 0; counter < 5; counter++)
             {
                 tempFitness += probabilities[counter];

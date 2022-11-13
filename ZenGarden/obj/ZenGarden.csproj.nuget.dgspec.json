@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Public\\FIIT STU\\Predmety_sem5\\Umelá inteligencia\\Zadanie2\\ZenGarden\\ZenGarden.csproj": {}
+    "c:\\Users\\Public\\FIIT STU\\Predmety_sem5\\Umelá inteligencia\\Zadanie2\\ZenGarden\\ZenGarden.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Public\\FIIT STU\\Predmety_sem5\\Umelá inteligencia\\Zadanie2\\ZenGarden\\ZenGarden.csproj": {
+    "c:\\Users\\Public\\FIIT STU\\Predmety_sem5\\Umelá inteligencia\\Zadanie2\\ZenGarden\\ZenGarden.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Public\\FIIT STU\\Predmety_sem5\\Umelá inteligencia\\Zadanie2\\ZenGarden\\ZenGarden.csproj",
+        "projectUniqueName": "c:\\Users\\Public\\FIIT STU\\Predmety_sem5\\Umelá inteligencia\\Zadanie2\\ZenGarden\\ZenGarden.csproj",
         "projectName": "ZenGarden",
-        "projectPath": "C:\\Users\\Public\\FIIT STU\\Predmety_sem5\\Umelá inteligencia\\Zadanie2\\ZenGarden\\ZenGarden.csproj",
+        "projectPath": "c:\\Users\\Public\\FIIT STU\\Predmety_sem5\\Umelá inteligencia\\Zadanie2\\ZenGarden\\ZenGarden.csproj",
         "packagesPath": "C:\\Users\\every\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Public\\FIIT STU\\Predmety_sem5\\Umelá inteligencia\\Zadanie2\\ZenGarden\\obj\\",
+        "outputPath": "c:\\Users\\Public\\FIIT STU\\Predmety_sem5\\Umelá inteligencia\\Zadanie2\\ZenGarden\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\every\\AppData\\Roaming\\NuGet\\NuGet.Config"
