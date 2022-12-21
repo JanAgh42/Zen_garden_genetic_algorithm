@@ -1,0 +1,5 @@
+A Zen garden is an area filled with coarser sand (small pebbles). However, it also contains immovable larger objects, such as stones, statues, constructions, self-growths. The monk is supposed to adjust the sand in the garden with a rake so that strips are formed. Strips can only go horizontally or vertically, never diagonally. The monk always starts at the edge of the garden and pulls a straight strip to the other edge or to an obstacle. On the edge - outside the garden, he can walk as he wants. However, if he comes to an obstacle - a stone or already buried sand - he has to turn around if he has room. If he has free directions left and right, it is up to him where he turns. If he has only one free direction, he turns there. If he has nowhere to turn, it's game over. A successful game is one in which the monk can dig up the entire garden under the given rules, in this case the maximum possible number of squares.
+
+The monk also collects fallen leaves. He must collect the leaves in order: first yellow, then orange and finally red. The leaves he can't collect yet are considered as solid obstacles.
+
+The mentioned task is solved using an evolutionary algorithm.
